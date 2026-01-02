@@ -1,4 +1,7 @@
 const express = require('express');
+const expenseRoutes = require('./src/Routes/expenseRoutes');
+const authRoutes = require('./src/Routes/authRoutes');
+const errorHandler = require('./src/middleware/errorMiddleware');
 
 // create an instance of Express
 const app = express();
@@ -10,5 +13,9 @@ app.use(express.urlencoded({extended : true}));
 // It parses URL-encoded bodies and convert them into JS Object and attches them to req.body
 
 //routes
+app.use('/api/expenses', expenseRoutes);
+app.use('/api/users' , authRoutes);
+
+app.use(errorHandler);
 
 module.exports = app;
